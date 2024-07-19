@@ -4,7 +4,7 @@ This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next
 
 online https://laofansay-reacrprintsign.vercel.app
 
-####浏览器的方式
+###浏览器的方式
 pc
 ![alt text](image-2.png)
 ![alt text](image-1.png)
