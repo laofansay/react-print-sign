@@ -85,7 +85,7 @@ const SignatureComponent = ({ onSave }) => {
         height="150"
         style={{ border: '1px solid black', touchAction: 'none' }}
       />
-      <button onClick={handleSave}>保存签名</button>
+      <button className="bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded shadow-md transition duration-300 ease-in-out transform hover:scale-105" onClick={handleSave}>保存签名</button>
     </div>
   );
 };
@@ -132,7 +132,8 @@ const ReceiptWithSignature = ({ signatureImage, productName }) => {
           <img src={signatureImage} alt="Signature" style={{ width: '100%', maxWidth: '300px' }} />
         </div>
       </div>
-      <button onClick={handlePrint}>使用浏览器功能打印回执</button>
+      <button className="bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded shadow-md transition duration-300 ease-in-out transform hover:scale-105"
+        onClick={handlePrint}>使用浏览器功能打印回执</button>
     </div>
   );
 };
@@ -211,6 +212,7 @@ const App = () => {
         <div>
           <label htmlFor="productName">商品名称：</label>
           <input
+            className="border border-gray-300 rounded-md p-2"
             type="text"
             id="productName"
             value={productName}
