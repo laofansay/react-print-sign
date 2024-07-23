@@ -1,7 +1,7 @@
 'use client'
 //@ts-nocheck
 import React, { useRef, useEffect, useState } from 'react';
-import ipp from 'ipp';
+//import ipp from 'ipp';
 import Image from 'next/image';
 import Link from 'next/link';
 const SignatureComponent = ({ onSave }) => {
@@ -152,7 +152,8 @@ const ReceWifiWithSignature = ({ signatureImage, productName }) => {
   const handlePrint = async () => {
     try {
       //alert("请改为你的局域网打印机IP")
-      const printer = await ipp.Printer('http://192.168.2.148:9100'); // 替换为你的打印机IP 
+      return;
+      //const printer = await ipp.Printer('http://192.168.2.148:9100'); // 替换为你的打印机IP 
 
       const fileBuffer = Buffer.from(
         "This is a test print from React application!",
