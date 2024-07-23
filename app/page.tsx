@@ -242,7 +242,7 @@ const App = () => {
           <p className="text-gray-600 mb-4">
             code:
             <code className="bg-gray-200 rounded p-1 text-sm">
-              const printer = await ipp.Printer("http://192.168.2.148:9100")  //替换为你的打印机IP
+              const printer = await ipp.Printer(&quot;http://192.168.2.148:9100&quot;)  //替换为你的打印机IP
             </code>
           </p>
           <ReceWifiWithSignature />
@@ -255,7 +255,7 @@ const App = () => {
             使用这个 react-native-esc-pos-printer 库;
             连接到打印机：
             <code className="bg-gray-200 rounded p-1 text-sm block mt-2">
-              await BluetoothManager.connect("YOUR_PRINTER_MAC_ADDRESS");
+              await BluetoothManager.connect(&quot;YOUR_PRINTER_MAC_ADDRESS&quot;);
             </code>
           </p>
         </section>

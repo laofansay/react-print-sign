@@ -43,9 +43,7 @@ export default function Sample() {
 
     function onFileChange(event: React.ChangeEvent<HTMLInputElement>): void {
         const { files } = event.target;
-
         const nextFile = files?.[0];
-
         if (nextFile) {
             setFile(nextFile);
         }
@@ -55,12 +53,9 @@ export default function Sample() {
         setNumPages(nextNumPages);
     }
 
-
     const handlePrint = async () => {
-
         setFile("http://127.0.0.1:8080/api/reports/down");
     };
-
 
     const dataURLToBlob = (dataURL) => {
         const byteString = atob(dataURL.split(',')[1]);
