@@ -1,3 +1,4 @@
+//@ts-nocheck
 'use client'
 import { useCallback, useState } from 'react';
 import { useResizeObserver } from '@wojtekmaj/react-hooks';
