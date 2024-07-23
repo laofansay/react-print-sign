@@ -1,7 +1,7 @@
 'use client'
 //@ts-nocheck
 import React, { useRef, useEffect, useState } from 'react';
-//import ipp from 'ipp';
+import ipp from 'ipp';
 import Image from 'next/image';
 import Link from 'next/link';
 const SignatureComponent = ({ onSave }) => {
@@ -152,8 +152,7 @@ const ReceWifiWithSignature = ({ signatureImage, productName }) => {
   const handlePrint = async () => {
     try {
       //alert("请改为你的局域网打印机IP")
-      return;
-      //const printer = await ipp.Printer('http://192.168.2.148:9100'); // 替换为你的打印机IP 
+      const printer = new ipp.Printer('http://192.168.2.148:9100'); // 替换为你的打印机IP 
 
       const fileBuffer = Buffer.from(
         "This is a test print from React application!",
@@ -169,11 +168,11 @@ const ReceWifiWithSignature = ({ signatureImage, productName }) => {
         data: fileBuffer
       };
 
-      printer.execute("Print-Job", msg, (err, res) => {
+      (printer.execute as any)("Print-Job", msg, (err: Error | null, res: any) => {
         if (err) {
-          console.error(err);
+          console.error('Error printing:', err);
         } else {
-          console.log(res);
+          console.log('Print job response:', res);
         }
       });
 
@@ -246,7 +245,6 @@ const App = () => {
               const printer = await ipp.Printer(&quot;http://192.168.2.148:9100&quot;)  //替换为你的打印机IP
             </code>
           </p>
-          <ReceWifiWithSignature />
         </section>
 
         <section className="bg-white shadow-md rounded-lg p-6">

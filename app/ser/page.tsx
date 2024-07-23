@@ -5,9 +5,10 @@ import { pdfjs, Document, Page } from 'react-pdf';
 import 'react-pdf/dist/esm/Page/AnnotationLayer.css';
 import 'react-pdf/dist/esm/Page/TextLayer.css';
 
-import type { PDFDocumentProxy } from 'pdfjs-dist';
+
 import SignatureComponent from '../component/SignatureComponent';
 import ReceiptWithSignature from '../component/ReceiptWithSignature';
+
 
 pdfjs.GlobalWorkerOptions.workerSrc = new URL(
     'pdfjs-dist/build/pdf.worker.min.mjs',
@@ -23,13 +24,13 @@ const resizeObserverOptions = {};
 
 const maxWidth = 800;
 
-type PDFFile = string | File | null;
+const PDFFile = File | null;
 
 export default function Sample() {
-    const [file, setFile] = useState < PDFFile > ('./sample.pdf');
-    const [numPages, setNumPages] = useState < number > ();
+    const [file, setFile] = useState < PDFFile > (null);
+    const [numPages, setNumPages] = useState < number > (0);
     const [containerRef, setContainerRef] = useState < HTMLElement | null > (null);
-    const [containerWidth, setContainerWidth] = useState < number > ();
+    const [containerWidth, setContainerWidth] = useState < number > (700);
 
     const onResize = useCallback < ResizeObserverCallback > ((entries) => {
         const [entry] = entries;
@@ -41,17 +42,17 @@ export default function Sample() {
 
     useResizeObserver(containerRef, resizeObserverOptions, onResize);
 
-    function onFileChange(event: React.ChangeEvent<HTMLInputElement>): void {
+    const onFileChange = (event) => {
         const { files } = event.target;
         const nextFile = files?.[0];
         if (nextFile) {
             setFile(nextFile);
         }
-    }
+    };
 
-    function onDocumentLoadSuccess({ numPages: nextNumPages }: PDFDocumentProxy): void {
-        setNumPages(nextNumPages);
-    }
+    const onDocumentLoadSuccess = ({ numPages }) => {
+        setNumPages(numPages);
+    };
 
     const handlePrint = async () => {
         setFile("http://127.0.0.1:8080/api/reports/down");
