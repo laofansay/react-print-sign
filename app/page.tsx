@@ -3,6 +3,7 @@
 import React, { useRef, useEffect, useState } from 'react';
 import ipp from 'ipp';
 import Image from 'next/image';
+import Link from 'next/link';
 const SignatureComponent = ({ onSave }) => {
   const canvasRef = useRef(null);
   const [isDrawing, setIsDrawing] = useState(false);
@@ -134,6 +135,9 @@ const ReceiptWithSignature = ({ signatureImage, productName }) => {
       </div>
       <button className="bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded shadow-md transition duration-300 ease-in-out transform hover:scale-105"
         onClick={handlePrint}>使用浏览器功能打印回执</button>
+
+
+
     </div>
   );
 };
@@ -204,49 +208,60 @@ const App = () => {
   };
 
   return (
-    <main>
+    <main className="bg-gray-100 min-h-screen">
+      <div className="container mx-auto px-4 py-8">
+        <h1 className="text-4xl font-bold text-center text-gray-800 mb-12">商品回执签名系统</h1>
 
-      <div style={{ padding: '20px' }}>
-        <h1>商品回执签名系统</h1>
-        <div>
-          <label htmlFor="productName">商品名称：</label>
-          <input
-            className="border border-gray-300 rounded-md p-2"
-            type="text"
-            id="productName"
-            value={productName}
-            onChange={(e) => setProductName(e.target.value)}
-          />
-        </div>
-        <SignatureComponent onSave={handleSaveSignature} />
-        {signatureImage && <ReceiptWithSignature signatureImage={signatureImage} productName={productName} />}
+        <section className="bg-white shadow-md rounded-lg p-6 mb-8">
+          <h2 className="text-3xl font-bold text-center text-blue-600 mb-6">
+            <a
+              href='/ser'
+              className="hover:text-blue-800 transition duration-300 ease-in-out underline decoration-2 underline-offset-4 hover:decoration-4"
+            >
+              后台服务生成签名例子
+            </a>
+          </h2>
 
+          <div className="mb-6">
+            <label htmlFor="productName" className="block text-gray-700 text-sm font-bold mb-2">商品名称：</label>
+            <input
+              className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+              type="text"
+              id="productName"
+              value={productName}
+              onChange={(e) => setProductName(e.target.value)}
+            />
+          </div>
 
-        <main className="container mx-auto p-4">
-          <h1 className="">WiFi 打印示例</h1>
-          <p>
+          <SignatureComponent onSave={handleSaveSignature} />
+          {signatureImage && <ReceiptWithSignature signatureImage={signatureImage} productName={productName} />}
+        </section>
+
+        <section className="bg-white shadow-md rounded-lg p-6 mb-8">
+          <h2 className="text-2xl font-bold text-gray-800 mb-4">WiFi 打印示例</h2>
+          <p className="text-gray-600 mb-4">
             code:
-            const printer = await ipp.Printer(&quothttp://192.168.2.148:9100&quot)  //替换为你的打印机IP
+            <code className="bg-gray-200 rounded p-1 text-sm">
+              const printer = await ipp.Printer("http://192.168.2.148:9100")  //替换为你的打印机IP
+            </code>
           </p>
-
           <ReceWifiWithSignature />
-        </main>
+        </section>
 
-        <main className="contain
-        er mx-auto p-4">
-          <h1 className="">蓝牙-打印示例</h1>
-          <p>
-            暂时没有蓝牙打印机测试中
-            使用这这个 react-native-esc-pos-printer 库;
-            连接到打印机
-            await BluetoothManager.connect(&#34YOUR_PRINTER_MAC_ADDRESS&#34);
+        <section className="bg-white shadow-md rounded-lg p-6">
+          <h2 className="text-2xl font-bold text-gray-800 mb-4">蓝牙-打印示例</h2>
+          <p className="text-gray-600">
+            暂时没有蓝牙打印机测试中。
+            使用这个 react-native-esc-pos-printer 库;
+            连接到打印机：
+            <code className="bg-gray-200 rounded p-1 text-sm block mt-2">
+              await BluetoothManager.connect("YOUR_PRINTER_MAC_ADDRESS");
+            </code>
           </p>
-        </main>
-
+        </section>
       </div>
-
-
     </main>
+
   );
 };
 
