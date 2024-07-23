@@ -147,10 +147,8 @@ const ReceWifiWithSignature = ({ signatureImage, productName }) => {
 
   const handlePrint = async () => {
     try {
-      alert("请改为你的局域网打印机Id")
-      return;
-      const printer = null;
-      {/* await ipp.Printer('http://192.168.2.148:9100'); // 替换为你的打印机IP */ }
+      //alert("请改为你的局域网打印机IP")
+      const printer = await ipp.Printer('http://192.168.2.148:9100'); // 替换为你的打印机IP 
 
       const fileBuffer = Buffer.from(
         "This is a test print from React application!",
@@ -184,7 +182,8 @@ const ReceWifiWithSignature = ({ signatureImage, productName }) => {
 
   return (
     <div>
-      <button onClick={handlePrint}>打印</button>
+      <button onClick={handlePrint} className="bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded shadow-md transition duration-300 ease-in-out transform hover:scale-105"
+      >wift打印</button>
     </div>
   );
 
@@ -230,7 +229,7 @@ const App = () => {
             const printer = await ipp.Printer(&quothttp://192.168.2.148:9100&quot)  //替换为你的打印机IP
           </p>
 
-          {/* <ReceWifiWithSignature /> */}
+          <ReceWifiWithSignature />
         </main>
 
         <main className="contain
