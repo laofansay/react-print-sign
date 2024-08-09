@@ -27,7 +27,7 @@ const PDFFile = File | null;
 
 export default function Sample() {
     const [file, setFile] = useState < PDFFile > ('./sample.pdf');
-    const [numPages, setNumPages] = useState < number > (1);
+    const [numPages, setNumPages] = useState < number > ();
     const [containerRef, setContainerRef] = useState < HTMLElement | null > (null);
     const [containerWidth, setContainerWidth] = useState < number > (600);
 

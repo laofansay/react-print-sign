@@ -132,7 +132,7 @@ const ReceiptWithSignature = ({ signatureImage, productName }) => {
         <p><strong>商品名称：</strong> {productName}</p>
         <div>
           <p><strong>客户签名：</strong></p>
-          {/* <img src={signatureImage} alt="Signature" style={{ width: '100%', maxWidth: '300px' }} /> */}
+          <img src={signatureImage} alt="Signature" style={{ width: '100%', maxWidth: '300px' }} />
         </div>
       </div>
       <button className="bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded shadow-md transition duration-300 ease-in-out transform hover:scale-105"

@@ -1,0 +1,53 @@
+// BluetoothPrinter.js
+import React, { useState } from 'react';
+
+const BluetoothPrinter = () => {
+    const [device, setDevice] = useState(null);
+    const [isConnected, setIsConnected] = useState(false);
+
+    const SERVICE_UUID = '0b802458-0231-1143-ef9d-42923ad9fa3d';
+
+    const connectPrinter = async () => {
+        try {
+            const device = await navigator.bluetooth.requestDevice({
+                filters: [{ services: [SERVICE_UUID] }]
+            });
+            const server = await device.gatt.connect();
+            setDevice(device);
+            setIsConnected(true);
+            console.log('Printer connected');
+        } catch (error) {
+            console.error('Connection failed:', error);
+        }
+    };
+
+    const printContent = async () => {
+        if (!isConnected || !device) {
+            console.error('Printer not connected');
+            return;
+        }
+
+        try {
+            const service = await device.gatt.getPrimaryService(SERVICE_UUID);
+            // 注意：您可能还需要一个特征 UUID 来写入数据
+            // const characteristic = await service.getCharacteristic('特征UUID');
+            // const encoder = new TextEncoder();
+            // const data = encoder.encode('Hello World\n');
+            // await characteristic.writeValue(data);
+            console.log('Print service accessed successfully');
+        } catch (error) {
+            console.error('Print failed:', error);
+        }
+    };
+
+
+    return (
+        <div className='flex flex-col gap-2'>
+            <button onClick={connectPrinter} className="bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded shadow-md transition duration-300 ease-in-out transform hover:scale-105">Connect to Printer</button>
+
+            <button disabled={!isConnected} onClick={printContent} className="bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded shadow-md transition duration-300 ease-in-out transform hover:scale-105">Print</button>
+        </div>
+    );
+};
+
+export default BluetoothPrinter;
